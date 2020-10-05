@@ -107,6 +107,8 @@ void registration()
 	fprintf(users, "%s:%s;", new_account.name , new_account.password);
 
 	login_true = 1;
+
+	FILE* file_of_friend = fopen(new_account.name, "w");
 }
 
 int correct = 0;
@@ -198,6 +200,39 @@ void menu()
 //input action
 }
 
+void add_friend()
+{
+	//пишу логін друга
+	char name_friend[30];
+	int friend_found = 0;
+
+
+	printf("Input your friend name: ");
+	scanf("%s", name_friend);
+
+	FILE* file_of_friend = fopen(ARCHIVE.ACCOUNTS[correct].name, "a");
+
+	for (int i = 0; i < ARCHIVE.counter_accounts; i++)
+	{
+		if (strcmp(name_friend, ARCHIVE.ACCOUNTS[i].name) == 0)
+		{
+			Sleep(100);
+			printf("Ok,this human registration in this site, now it's your friend\n");//найшло
+			friend_found = i;
+			fprintf(file_of_friend, "%s:", name_friend);
+			break;
+
+		}
+		//якщо нема мені код пише про це
+		else if (strcmp(name_friend, ARCHIVE.ACCOUNTS[i].name) != 0)
+		{
+			Sleep(100);
+			printf("Dont found[%d]\n", i);//не найшло
+			continue;
+		}
+	}
+}
+
 void menu_after_login()
 {
 	if (login_true == 1)
@@ -205,7 +240,7 @@ void menu_after_login()
 		int action_for_2menu = 0;
 
 		printf("----------TELESTAS @%s----------\n ", ARCHIVE.ACCOUNTS[correct].name);
-		printf("1. -------See-friends-------\n ");
+		printf("1. -------Add-friends-------\n ");
 		printf("2. -------Send-message------\n ");
 		printf("3. -------Read-message------\n ");
 		printf("4. -------Exit--------------\n ");
@@ -214,9 +249,9 @@ void menu_after_login()
 
 		if (action_for_2menu == 1)
 		{
-			printf("soon\n");
 			Sleep(500);
 			system("cls");
+			add_friend();
 			menu_after_login();			
 		}
 		else if (action_for_2menu == 2)
@@ -242,6 +277,52 @@ void menu_after_login()
 		}
 	}
 }
+
+	//якщо э тоді довляє його логін в файлик
+	
+
+
+	
+
+
+
+
+
+
+
+	/*     
+	void registration()
+{
+	struct account new_account;
+
+	printf("input your name here:");
+	scanf("%s", new_account.name);
+	Sleep(500);
+	printf("input your password here:");
+	scanf("%s", new_account.password);
+	Sleep(500);
+
+	ARCHIVE.ACCOUNTS[ARCHIVE.counter_accounts] = new_account;
+	ARCHIVE.counter_accounts++;
+
+	FILE* users = fopen("C:\\Users\\mrrim\\source\\repos\\telegram\\telegram\\TEXT.txt", "a");
+
+	fprintf(users, "%s:%s;", new_account.name , new_account.password);
+
+	login_true = 1;
+
+	
+	
+	
+	
+	*/
+
+
+
+
+
+
+
 
 
 
