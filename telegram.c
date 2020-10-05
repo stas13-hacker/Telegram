@@ -233,6 +233,91 @@ void add_friend()
 	}
 }
 
+void See_friend()
+{
+	FILE* file_of_friend = fopen(ARCHIVE.ACCOUNTS[correct].name, "r");
+	
+	char text_friend = ':';
+
+	while (text_friend != EOF)
+	{
+		if (text_friend != EOF) //tipp //t t i p
+		{
+			text_friend = fgetc(file_of_friend);
+			printf("%c", text_friend);
+			
+		}
+		else if (text_friend == EOF)
+		{
+			break;
+		}
+	}
+}
+
+ /*FILE* users = fopen("C:\\Users\\mrrim\\source\\repos\\telegram\\telegram\\TEXT.txt", "r");
+
+	
+	
+	
+	char text = fgetc(users); // ПЕРША БУКВА
+
+	acc.name[name_password_i] = text;
+	name_password_i++;
+
+	if (users == 0)
+	{
+		printf("can be open");
+	}
+
+	for (; text != EOF;)
+	{
+		text = fgetc(users);
+
+
+		if (password_now == 0 && text != ':')
+		{
+			acc.name[name_password_i] = text; // 2
+			name_password_i++;
+		}
+		if (text == ':') //якщо нейм закінчився
+		{
+			acc.name[name_password_i] = '\0';
+			name_password_i = 0;
+
+			password_now = 1;//<-
+			continue;
+		}
+		// починаэтья пароль
+
+		
+		if (password_now == 1 && text != ';')
+		{
+			acc.password[name_password_i] = text; //1 pass
+			name_password_i++;
+		}
+		if (text == ';') //якщо пароль закінчився
+		{
+			acc.password[name_password_i] = '\0';
+			name_password_i = 0;
+
+			password_now = 0;//<-
+
+			ARCHIVE.ACCOUNTS[ARCHIVE.counter_accounts] = acc;
+			ARCHIVE.counter_accounts++;
+		}
+		
+	}*/
+
+
+
+
+
+
+
+
+
+
+
 void menu_after_login()
 {
 	if (login_true == 1)
@@ -240,10 +325,11 @@ void menu_after_login()
 		int action_for_2menu = 0;
 
 		printf("----------TELESTAS @%s----------\n ", ARCHIVE.ACCOUNTS[correct].name);
-		printf("1. -------Add-friends-------\n ");
-		printf("2. -------Send-message------\n ");
-		printf("3. -------Read-message------\n ");
-		printf("4. -------Exit--------------\n ");
+		printf("1. -------Add-friend--------\n ");
+		printf("2. -------See-friend--------\n" );
+		printf("3. -------Send-message------\n ");
+		printf("4. -------Read-message------\n ");
+		printf("5. -------Exit--------------\n ");
 		printf("Input action ");
 		scanf("%d", &action_for_2menu);
 
@@ -256,9 +342,9 @@ void menu_after_login()
 		}
 		else if (action_for_2menu == 2)
 		{
-			printf("soon\n");
-			Sleep(500);
 			system("cls");
+			See_friend();
+			Sleep(10000);
 			menu_after_login();	
 		}
 		else if (action_for_2menu == 3)
@@ -269,6 +355,13 @@ void menu_after_login()
 			menu_after_login();			
 		}
 		else if (action_for_2menu == 4)
+		{
+			printf("soon\n");
+			Sleep(500);
+			system("cls");
+			menu_after_login();
+		}
+		else if (action_for_2menu == 5)
 		{
 			system("cls");
 			printf("\nOK\n");
