@@ -141,6 +141,26 @@ void login()
 
 }
 
+void add_friend_to_name(char* name, char* name_friends)
+{
+	char friends[60] = "-friends\0";
+	int i = 0;
+	int b = 0;
+
+	while (name[i] != '\0')
+	{
+		name_friends[i] = name[i];
+		i++;
+	}
+	while (friends[b] != '\0')
+	{
+		name_friends[i] = friends[b];
+		i++;
+		b++;
+	}
+	name_friends[i] = '\0';
+}
+
 void registration()
 {
 	struct account new_account;
@@ -159,13 +179,13 @@ void registration()
 
 	fprintf(users, "%s:%s;", new_account.name , new_account.password);
 
-	FILE* file_of_friend = fopen(new_account.name, "w");
+	char name_of_friends[60];
+
+	add_friend_to_name(new_account.name, name_of_friends);
+	FILE* file_of_friend = fopen(name_of_friends, "w");
 
 	login();
 }
-
-
-
 
 void menu()
 {
@@ -260,7 +280,9 @@ void See_friend()
 void send_message()
 {
 	//вибираю кому надіслати
+	//for
 	//якщо нема кому тоді добавити друга
+	//menu after login
 	//надсилаю повідомлення
 	//він отримує його в файлик
 }
@@ -277,8 +299,8 @@ void menu_after_login()
 
 		printf("----------TELESTAS @%s----------\n ", ARCHIVE.ACCOUNTS[correct].name);
 		printf("1. -------Add-friend--------\n ");
-		printf("2. -------See-friend--------\n" );
-		printf(" 3. -------Send-message------\n ");
+		printf("2. -------See-friend--------\n ");
+		printf("3. -------Send-message------\n ");
 		printf("4. -------Read-message------\n ");
 		printf("5. -------Exit--------------\n ");
 		printf("Input action ");
