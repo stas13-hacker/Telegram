@@ -88,29 +88,6 @@ void print_all_accounts()
 	}
 }
 
-void registration()
-{
-	struct account new_account;
-
-	printf("input your name here:");
-	scanf("%s", new_account.name);
-	Sleep(500);
-	printf("input your password here:");
-	scanf("%s", new_account.password);
-	Sleep(500);
-
-	ARCHIVE.ACCOUNTS[ARCHIVE.counter_accounts] = new_account;
-	ARCHIVE.counter_accounts++;
-
-	FILE* users = fopen("C:\\Users\\mrrim\\source\\repos\\telegram\\telegram\\TEXT.txt", "a");
-
-	fprintf(users, "%s:%s;", new_account.name , new_account.password);
-
-	login_true = 1;
-
-	FILE* file_of_friend = fopen(new_account.name, "w");
-}
-
 int correct = 0;
 
 void login()
@@ -120,7 +97,7 @@ void login()
 	char password[60];
 
 	login_true = 0;
-	
+
 	printf("Write your login-> ");
 	scanf(" %s", name);
 
@@ -161,8 +138,34 @@ void login()
 		printf("password incorrect [%d]\n", correct);
 		login();
 	}
-	
+
 }
+
+void registration()
+{
+	struct account new_account;
+
+	printf("input your name here:");
+	scanf("%s", new_account.name);
+	Sleep(500);
+	printf("input your password here:");
+	scanf("%s", new_account.password);
+	Sleep(500);
+
+	ARCHIVE.ACCOUNTS[ARCHIVE.counter_accounts] = new_account;
+	ARCHIVE.counter_accounts++;
+
+	FILE* users = fopen("C:\\Users\\mrrim\\source\\repos\\telegram\\telegram\\TEXT.txt", "a");
+
+	fprintf(users, "%s:%s;", new_account.name , new_account.password);
+
+	FILE* file_of_friend = fopen(new_account.name, "w");
+
+	login();
+}
+
+
+
 
 void menu()
 {
@@ -254,65 +257,13 @@ void See_friend()
 	}
 }
 
- /*FILE* users = fopen("C:\\Users\\mrrim\\source\\repos\\telegram\\telegram\\TEXT.txt", "r");
-
-	
-	
-	
-	char text = fgetc(users); // ПЕРША БУКВА
-
-	acc.name[name_password_i] = text;
-	name_password_i++;
-
-	if (users == 0)
-	{
-		printf("can be open");
-	}
-
-	for (; text != EOF;)
-	{
-		text = fgetc(users);
-
-
-		if (password_now == 0 && text != ':')
-		{
-			acc.name[name_password_i] = text; // 2
-			name_password_i++;
-		}
-		if (text == ':') //якщо нейм закінчився
-		{
-			acc.name[name_password_i] = '\0';
-			name_password_i = 0;
-
-			password_now = 1;//<-
-			continue;
-		}
-		// починаэтья пароль
-
-		
-		if (password_now == 1 && text != ';')
-		{
-			acc.password[name_password_i] = text; //1 pass
-			name_password_i++;
-		}
-		if (text == ';') //якщо пароль закінчився
-		{
-			acc.password[name_password_i] = '\0';
-			name_password_i = 0;
-
-			password_now = 0;//<-
-
-			ARCHIVE.ACCOUNTS[ARCHIVE.counter_accounts] = acc;
-			ARCHIVE.counter_accounts++;
-		}
-		
-	}*/
-
-
-
-
-
-
+void send_message()
+{
+	//вибираю кому надіслати
+	//якщо нема кому тоді добавити друга
+	//надсилаю повідомлення
+	//він отримує його в файлик
+}
 
 
 
@@ -327,7 +278,7 @@ void menu_after_login()
 		printf("----------TELESTAS @%s----------\n ", ARCHIVE.ACCOUNTS[correct].name);
 		printf("1. -------Add-friend--------\n ");
 		printf("2. -------See-friend--------\n" );
-		printf("3. -------Send-message------\n ");
+		printf(" 3. -------Send-message------\n ");
 		printf("4. -------Read-message------\n ");
 		printf("5. -------Exit--------------\n ");
 		printf("Input action ");
@@ -371,50 +322,7 @@ void menu_after_login()
 	}
 }
 
-	//якщо э тоді довляє його логін в файлик
 	
-
-
-	
-
-
-
-
-
-
-
-	/*     
-	void registration()
-{
-	struct account new_account;
-
-	printf("input your name here:");
-	scanf("%s", new_account.name);
-	Sleep(500);
-	printf("input your password here:");
-	scanf("%s", new_account.password);
-	Sleep(500);
-
-	ARCHIVE.ACCOUNTS[ARCHIVE.counter_accounts] = new_account;
-	ARCHIVE.counter_accounts++;
-
-	FILE* users = fopen("C:\\Users\\mrrim\\source\\repos\\telegram\\telegram\\TEXT.txt", "a");
-
-	fprintf(users, "%s:%s;", new_account.name , new_account.password);
-
-	login_true = 1;
-
-	
-	
-	
-	
-	*/
-
-
-
-
-
-
 
 
 
@@ -427,3 +335,7 @@ int main()
 	 system("cls");
 	 menu_after_login();
 }
+
+
+// пофіксити помилки
+//
