@@ -2,6 +2,12 @@
 #include <stdio.h>
 #include <Windows.h>
 
+
+
+
+
+
+
 struct account
 {
 	char name[64];
@@ -23,6 +29,7 @@ void read_all_accounts()
 	FILE* users = fopen("C:\\Users\\mrrim\\source\\repos\\telegram\\telegram\\TEXT.txt", "r");
 
 	int name_password_i = 0;
+
 	int password_now = 0;
 	int counter_accounts = 0;
 	ARCHIVE.counter_accounts = 0;
@@ -161,6 +168,25 @@ void add_friend_to_name(char* name, char* name_friends)
 	name_friends[i] = '\0';
 }
 
+void add_message_to_name(char* name, char* name_friends){
+	char message[60] = "-message\0";
+	int i = 0;
+	int b = 0;
+
+	while (name[i] != '\0')
+	{
+		name_friends[i] = name[i];
+		i++;
+	}
+	while (message[b] != '\0')
+	{
+		name_friends[i] = message[b];
+		i++;
+		b++;
+	}
+	name_friends[i] = '\0';
+}
+
 void registration()
 {
 	struct account new_account;
@@ -180,9 +206,12 @@ void registration()
 	fprintf(users, "%s:%s;", new_account.name , new_account.password);
 
 	char name_of_friends[60];
+	char name_message[60];
 
 	add_friend_to_name(new_account.name, name_of_friends);
+	add_message_to_name(new_account.name, name_message);
 	FILE* file_of_friend = fopen(name_of_friends, "w");
+	FILE* my_message = fopen(name_message, "w");
 
 	login();
 }
@@ -216,7 +245,6 @@ void menu()
 		Sleep(500);
 		system("cls");
 		print_all_accounts();	
-		system("cls");
 		menu();
 	}
 //registation
@@ -264,7 +292,7 @@ void See_friend()
 
 	while (text_friend != EOF)
 	{
-		if (text_friend != EOF) //tipp //t t i p
+		if (text_friend != EOF)
 		{
 			text_friend = fgetc(file_of_friend);
 			printf("%c", text_friend);
@@ -279,17 +307,21 @@ void See_friend()
 
 void send_message()
 {
-	//вибираю кому надіслати
-	//for
-	//якщо нема кому тоді добавити друга
-	//menu after login
-	//надсилаю повідомлення
-	//він отримує його в файлик
+	char name_friend[30];
+	char message[128];
+	char message_name[64];
+	int friend_found = 0;
+	int b = 0;
+
+	printf("choose your friend");
+	scanf("%s", name_friend);
+	printf("\n:");
+	scanf("%s", message);
+	                         //taras                  //taras-message
+	add_message_to_name(ARCHIVE.ACCOUNTS[correct].name, message_name);
+	FILE* file_of_message = fopen(message_name, "a");
+	fprintf(file_of_message, "%s:%s;", name_friend, message);
 }
-
-
-
-
 
 void menu_after_login()
 {
@@ -322,7 +354,7 @@ void menu_after_login()
 		}
 		else if (action_for_2menu == 3)
 		{
-			printf("soon\n");
+			send_message();
 			Sleep(500);
 			system("cls");
 			menu_after_login();			
@@ -345,6 +377,9 @@ void menu_after_login()
 }
 
 	
+
+
+
 
 
 
