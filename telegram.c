@@ -323,8 +323,56 @@ void send_message()
 	fprintf(file_of_message, "%s:%s;", name_friend, message);
 }
 
-void menu_after_login()
+void read_message()
 {
+	char message_name[64];
+
+	add_message_to_name(ARCHIVE.ACCOUNTS[correct].name, message_name);
+	FILE* file_of_friend = fopen(message_name, "r");
+
+	char text_friend = ':';
+	//char text_message = ';';
+
+	printf("[@");
+	for (int i = 0; text_friend != EOF; i++)
+	{
+		if (text_friend != EOF)
+		{
+			text_friend = fgetc(file_of_friend);
+
+			if (text_friend != ':' && text_friend != ';')
+			{
+				printf("%c", text_friend);
+			}
+			if (text_friend == ':')
+			{
+				printf("]");
+			}
+			if (text_friend == ':')
+			{
+				printf(" -> ");
+			}
+			if (text_friend == ';')
+			{
+				printf("\n[@");
+			}
+			else if (text_friend == EOF)
+			{
+				break;
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
+
+	void menu_after_login()
+	 {
 	if (login_true == 1)
 	{
 		int action_for_2menu = 0;
@@ -361,8 +409,8 @@ void menu_after_login()
 		}
 		else if (action_for_2menu == 4)
 		{
-			printf("soon\n");
-			Sleep(500);
+			read_message();
+			Sleep(10000);
 			system("cls");
 			menu_after_login();
 		}
